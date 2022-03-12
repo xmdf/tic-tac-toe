@@ -1,2 +1,3 @@
-# cpp_template
-Template repo for C++ projects
+# Tic Tac Toe
+
+Starting with command line version then will try a GUI?
