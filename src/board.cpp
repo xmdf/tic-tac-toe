@@ -7,6 +7,8 @@
 
 #include "board.hpp"
 
+#include <iostream>
+
 namespace ttt {
 
     std::string board_ascii_base_get()
@@ -25,12 +27,16 @@ namespace ttt {
     : ascii_board_{board_ascii_base_get()}
     , spot_map_{2, 8, 14, 38, 44, 50, 74, 80, 86}
     {
+    }
+
+    void Board::init()
+    {
         this->ascii_board_init();
     }
 
     void Board::ascii_board_print()
     {
-        std::cout << this->ascii_board_ << std::endl;
+        std::cout << this->ascii_board_ << std::endl << std::endl;
     }
 
     void Board::ascii_board_init()
@@ -48,6 +54,18 @@ namespace ttt {
     bool Board::winner_check()
     {
         return this->winner_rows_check() || this->winner_cols_check() || this->winner_diag_check();
+    }
+
+    bool Board::board_full()
+    {
+        for(uint8_t i = 0; i < static_cast<uint8_t>(this->spot_map_.size()); ++i) {
+            if (this->ascii_board_[this->spot_map_[i]] != 'X' &&
+                this->ascii_board_[this->spot_map_[i]] != 'O') {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     bool Board::winner_rows_check()
@@ -73,12 +91,12 @@ namespace ttt {
     bool Board::spot_map_char_compare(uint8_t i1, uint8_t i2, uint8_t i3)
     {
         return Board::char_compare(
-            reinterpret_cast<const char *>(this->ascii_board_[this->spot_map_[i1]]),
-            reinterpret_cast<const char *>(this->ascii_board_[this->spot_map_[i1]]),
-            reinterpret_cast<const char *>(this->ascii_board_[this->spot_map_[i1]]));
+            this->ascii_board_[this->spot_map_[i1]],
+            this->ascii_board_[this->spot_map_[i2]],
+            this->ascii_board_[this->spot_map_[i3]]);
     }
 
-    bool Board::char_compare(const char *c1, const char *c2, const char *c3)
+    bool Board::char_compare(const char c1, const char c2, const char c3)
     {
         return (c1 == c2) && (c1 == c3);
     }

@@ -6,14 +6,14 @@
  */
 
 
-#include "board.hpp"
+#include "tic_tac_toe.hpp"
 
  
 int main()
 {
-    ttt::Board board{};
+    ttt::TicTacToe game{};
 
-    board.ascii_board_print();
+    game.play();
 
     return 0;
 }

@@ -1,10 +1,12 @@
 
 SET(ttt_header_files
         board.hpp
+        tic_tac_toe.hpp
         )
 
 SET(ttt_source_files
         board.cpp
+        tic_tac_toe.cpp
         )
 
 ADD_LIBRARY(ttt_lib SHARED
@@ -23,3 +25,6 @@ TARGET_INCLUDE_DIRECTORIES(ttt_lib PUBLIC
         )
 
 ADD_EXECUTABLE(main main.cpp)
+TARGET_LINK_LIBRARIES(main
+        ttt_lib
+        )

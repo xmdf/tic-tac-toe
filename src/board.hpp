@@ -8,7 +8,6 @@
 #pragma once
 
 #include <array>
-#include <iostream>
 #include <string>
 
 namespace ttt {
@@ -18,15 +17,19 @@ namespace ttt {
     public:
         Board();
 
-        void ascii_board_print();
+        void init();
 
         bool winner_check();
+
+        bool board_full();
+
+        void ascii_board_print();
+
+        void ascii_board_update(uint8_t i, const char *c);
 
         ~Board() = default;
 
     protected:
-        void ascii_board_update(uint8_t i, const char *c);
-
         void ascii_board_init();
 
         bool winner_rows_check();
@@ -37,7 +40,7 @@ namespace ttt {
 
         bool spot_map_char_compare(uint8_t i1, uint8_t i2, uint8_t i3);
 
-        static bool char_compare(const char *c1, const char *c2, const char *c3);
+        static bool char_compare(char c1, char c2, char c3);
 
     protected:
         std::string ascii_board_;
